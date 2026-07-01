@@ -1,0 +1,63 @@
+/* Custom styles for Earthquake cards and feeds */
+
+.eq-card {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+}
+
+.eq-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  box-shadow: 0 0 10px transparent;
+  transition: box-shadow 0.3s ease;
+  pointer-events: none;
+}
+
+.eq-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(6, 182, 212, 0.4);
+}
+
+.eq-card.severity-critical:hover {
+  border-color: rgba(239, 68, 68, 0.5);
+  box-shadow: 0 4px 20px rgba(239, 68, 68, 0.25);
+}
+
+.eq-card.severity-major:hover {
+  border-color: rgba(245, 158, 11, 0.5);
+  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.25);
+}
+
+.eq-card.severity-moderate:hover {
+  border-color: rgba(234, 179, 8, 0.4);
+  box-shadow: 0 4px 20px rgba(234, 179, 8, 0.2);
+}
+
+.eq-card.severity-minor:hover {
+  border-color: rgba(6, 182, 212, 0.4);
+  box-shadow: 0 4px 20px rgba(6, 182, 212, 0.2);
+}
+
+/* Activity logs custom scrollbar */
+.activity-feed-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(6, 182, 212, 0.2) rgba(15, 23, 42, 0.3);
+}
+.activity-feed-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+.activity-feed-scroll::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.3);
+}
+.activity-feed-scroll::-webkit-scrollbar-thumb {
+  background: rgba(6, 182, 212, 0.2);
+  border-radius: 2px;
+}
+.activity-feed-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(6, 182, 212, 0.5);
+}
