@@ -10,3 +10,4 @@ Drag rotation control added.
 Reset view option added.
 Controls improve usability and interactivity.
 NU branch complete with controls.
+ everything added to earth.html

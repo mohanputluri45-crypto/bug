@@ -5,3 +5,5 @@ Starfield background effect added.
 Cinematic visual effects applied.
 Visual effects enhance globe aesthetics.
 Omega branch complete with visual effects.
+
+everything animated visuals code added in earth.html
