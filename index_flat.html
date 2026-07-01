@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Live earthquake monitoring dashboard with auto-refreshing seismic data from USGS.">
+    <title>Terra — Live Earthquake Monitor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Ambient background pulses -->
+    <div class="ambient-bg">
+        <div class="pulse-ring pulse-ring-1"></div>
+        <div class="pulse-ring pulse-ring-2"></div>
+        <div class="pulse-ring pulse-ring-3"></div>
+    </div>
+
+    <header id="main-header">
+        <div class="header-left">
+            <div class="logo">
+                <span class="logo-icon">◉</span>
+                <h1>Terra</h1>
+            </div>
+            <span class="subtitle">Live Seismic Monitor</span>
+        </div>
+        <div class="header-right">
+            <div class="status-badge" id="status-badge">
+                <span class="status-dot"></span>
+                <span class="status-text">LIVE</span>
+            </div>
+            <div class="refresh-info" id="refresh-info">
+                Refreshing in <span id="countdown">30</span>s
+            </div>
+        </div>
+    </header>
+
+    <main id="dashboard">
+        <!-- Stats row -->
+        <section class="stats-row" id="stats-row">
+            <div class="stat-card" id="stat-total">
+                <div class="stat-icon">📊</div>
+                <div class="stat-content">
+                    <span class="stat-value" id="total-count">—</span>
+                    <span class="stat-label">Total Events</span>
+                </div>
+            </div>
+            <div class="stat-card" id="stat-max-mag">
+                <div class="stat-icon">⚡</div>
+                <div class="stat-content">
+                    <span class="stat-value" id="max-magnitude">—</span>
+                    <span class="stat-label">Max Magnitude</span>
+                </div>
+            </div>
+            <div class="stat-card" id="stat-avg-mag">
+                <div class="stat-icon">📈</div>
+                <div class="stat-content">
+                    <span class="stat-value" id="avg-magnitude">—</span>
+                    <span class="stat-label">Avg Magnitude</span>
+                </div>
+            </div>
+            <div class="stat-card" id="stat-last-update">
+                <div class="stat-icon">🕐</div>
+                <div class="stat-content">
+                    <span class="stat-value" id="last-update">—</span>
+                    <span class="stat-label">Last Updated</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feed selector -->
+        <section class="controls-bar" id="controls-bar">
+            <div class="feed-selector">
+                <label for="feed-select">Data Feed:</label>
+                <select id="feed-select">
+                    <option value="all_hour">All — Past Hour</option>
+                    <option value="all_day">All — Past Day</option>
+                    <option value="2.5_day">M 2.5+ — Past Day</option>
+                    <option value="4.5_day">M 4.5+ — Past Day</option>
+                    <option value="significant_month">Significant — Past Month</option>
+                </select>
+            </div>
+            <button class="refresh-btn" id="refresh-btn" title="Refresh now">
+                <svg class="refresh-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="23 4 23 10 17 10"></polyline>
+                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                </svg>
+                Refresh Now
+            </button>
+        </section>
+
+        <!-- Earthquake list -->
+        <section class="quake-list-section">
+            <div class="section-header">
+                <h2>Recent Earthquakes</h2>
+                <span class="event-count" id="event-count"></span>
+            </div>
+
+            <!-- Loading state -->
+            <div class="loading-state" id="loading-state">
+                <div class="spinner"></div>
+                <p>Fetching seismic data…</p>
+            </div>
+
+            <!-- Error state -->
+            <div class="error-state hidden" id="error-state">
+                <span class="error-icon">⚠️</span>
+                <p id="error-message">Could not load earthquake data.</p>
+                <button class="retry-btn" id="retry-btn">Retry</button>
+            </div>
+
+            <!-- Empty state -->
+            <div class="empty-state hidden" id="empty-state">
+                <span class="empty-icon">🌍</span>
+                <p>No earthquakes recorded in this time window. That's a good thing!</p>
+            </div>
+
+            <!-- Quake cards container -->
+            <div class="quake-cards hidden" id="quake-cards"></div>
+        </section>
+    </main>
+
+    <!-- Progress bar for auto-refresh -->
+    <div class="refresh-progress" id="refresh-progress">
+        <div class="refresh-progress-bar" id="refresh-progress-bar"></div>
+    </div>
+
+    <script src="refresh.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
